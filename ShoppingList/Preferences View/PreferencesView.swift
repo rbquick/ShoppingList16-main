@@ -36,6 +36,14 @@ struct PreferencesView: View {
 	@AppStorage(kDisableTimerWhenInBackgroundKey)
 	private var suspendTimerWhenInBackground = kDisableTimerWhenInBackgroundDefaultValue
 
+    // rbq added 2023-03-30
+    // this is the @FetchRequest that ties this view to CoreData Locations
+    @FetchRequest(fetchRequest: Location.allLocationsFR())
+    private var locations: FetchedResults<Location>
+    @FetchRequest(fetchRequest: Item.allItemsFR(onList: true))
+    private var itemsOnList: FetchedResults<Item>
+    @FetchRequest(fetchRequest: Item.allItemsFR(onList: false))
+    private var itemsOffList: FetchedResults<Item>
 	var body: some View {
 		Form {
 			Section(header: Text("Purchased Items History Mark"),
@@ -70,6 +78,13 @@ struct PreferencesView: View {
 							writeDatabase()
 						}
 						.hCentered()
+                        // rbq added 2023-03-30
+                        // 3.  Delete sample data
+                        Button("Delete All Data") {
+                            deleteAllData()
+                        }
+                        .hCentered()
+                        .disabled(Item.count() == 0)
 					} // end of List
 					.listRowSeparator(.automatic)
 				} // end of Section
@@ -97,5 +112,20 @@ struct PreferencesView: View {
 		writeAsJSON(items: Location.allUserLocations(),
 								to: kLocationsFilename)
 	}
-	
+    // rbq added 2023-03-30
+    // delete all the items on and off the list before the locations
+    func deleteAllData() {
+        print("Items On:  \(itemsOnList.count)")
+        for item in itemsOnList {
+            Item.delete(item)
+        }
+        print("Items Off: \(itemsOffList.count)")
+        for item in itemsOffList {
+            Item.delete(item)
+        }
+        print("Locations: \(locations.count)")
+        for location in locations {
+            Location.delete(location)
+        }
+    }
 }
