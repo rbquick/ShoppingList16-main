@@ -22,7 +22,7 @@ struct CompactMainView: View {
 			
 			NavigationStack { PurchasedItemsView() }
 				.tabItem { Label("Purchased", systemImage: "purchased") }
-			
+
 			NavigationStack { LocationsView() }
 				.tabItem { Label("Locations", systemImage: "map") }
 			

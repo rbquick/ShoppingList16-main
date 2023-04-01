@@ -18,7 +18,7 @@ import CoreData
 #if targetEnvironment(simulator)
 	let kShowDevTools = true
 #else
-	let kShowDevTools = false
+let kShowDevTools = true    // rbq changed 2023-04-01
 #endif
 
 // i used these constants and functions below during development to import and
@@ -27,6 +27,7 @@ import CoreData
 let kJSONDumpDirectory = "/Users/YOUR USERNAME HERE/Desktop/"	// dumps to the Desktop: Adjust for your Username!
 let kItemsFilename = "items.json"
 let kLocationsFilename = "locations.json"
+let kShopListsFilename = "shoplists.json"
 
 // to write stuff out -- a list of Items and a list of Locations --
 // the code is essentially the same except for the typing of the objects
@@ -74,6 +75,9 @@ func writeAsJSON<T>(items: [T], to filename: String) where T: CodableStructRepre
 
 func populateDatabaseFromJSON(persistentStore: PersistentStore) {
 	// it sure is easy to do this with HWS's Bundle extension (!)
+    // rbq added shoplist 2023-03-31
+    let codableShopLists: [ShopListCodableProxy] = Bundle.main.decode(from: kShopListsFilename)
+    insertNewShopLists(from: codableShopLists)
 	let codableLocations: [LocationCodableProxy] = Bundle.main.decode(from: kLocationsFilename)
 	insertNewLocations(from: codableLocations)
 	let codableItems: [ItemCodableProxy] = Bundle.main.decode(from: kItemsFilename)
@@ -106,9 +110,22 @@ func insertNewItems(from codableItems: [ItemCodableProxy]) {
 		
 	}
 }
-
+// rbq added 2023-03-31
+func insertNewShopLists(from codableShopLists: [ShopListCodableProxy]) {
+    for codableShopList in codableShopLists {
+        let newShopList = ShopList.addNewShopList()
+        newShopList.name = codableShopList.name
+    }
+}
 // used to insert data from JSON files in the app bundle
 func insertNewLocations(from codableLocations: [LocationCodableProxy]) {
+
+    //  rbq added 2023-03-31
+    // get all ShopLists
+    // group by name for lookup below when adding an item to a location
+    let shoplists = ShopList.allUserShopLists()
+    let name2ShopList = Dictionary(grouping: shoplists, by: { $0.name })
+
 	for codableLocation in codableLocations {
 		let newLocation = Location.addNewLocation() // new UUID created here
 		newLocation.name = codableLocation.name
@@ -117,6 +134,17 @@ func insertNewLocations(from codableLocations: [LocationCodableProxy]) {
 		newLocation.green_ = codableLocation.green
 		newLocation.blue_ = codableLocation.blue
 		newLocation.opacity_ = codableLocation.opacity
+
+        // rbq added 2023-03-31
+        // look up matching location by name
+        // anything that doesn't match goes to the unknown location.
+        if let shoplist = name2ShopList[codableLocation.shoplistName]?.first {
+            newLocation.shoplist = shoplist
+        } else {
+            // rbq 2023-03-31
+            // if unknow, ????
+//            newLocation.location = Location.unknownLocation() // if necessary, this creates the Unknown Location
+        }
 	}
 }
 

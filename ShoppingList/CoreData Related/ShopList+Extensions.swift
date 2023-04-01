@@ -10,7 +10,12 @@ import CoreData
 import Foundation
 import SwiftUI
 
-extension ShopList {
+extension ShopList: Comparable {
+
+    // add Comparable conformance: sort by visitation order
+    public static func < (lhs: ShopList, rhs: ShopList) -> Bool {
+        lhs.name < rhs.name
+    }
     // MARK: - Fronting Properties
 
     // the name.  this fronts a Core Data optional attribute
@@ -37,6 +42,28 @@ extension ShopList {
 
     // MARK: - Useful Fetch Request
 
+    // This will return the name of the currectly active ShopList
+    // this is set up on the shoplistView that I haven't created yet
+    class func masterShopListName() -> String {
+        let master = masterShopList()
+        return master.name
+    }
+    // This will get the current ShopList eventually using the selected item of the shoplists
+    // for testing it is just manually selected here
+    class func masterShopList() -> ShopList {
+        // this has to go somewhere
+        let MasterShopListName = "Costco"
+        let myshoplists = allUserShopLists()
+        if let index = myshoplists.firstIndex(where: { $0.name == MasterShopListName } ) {
+            return myshoplists[index]
+        } else {
+            let newshoplist = ShopList.addNewShopList()
+            newshoplist.name = "Unknown"
+            return newshoplist
+        }
+
+    }
+
     // a fetch request we can use in views to get all locations, sorted in name order.
 
     class func allShopListsFR() -> NSFetchRequest<ShopList> {
@@ -56,7 +83,10 @@ extension ShopList {
     class func count() -> Int {
         return count(context: persistentStore.context)
     }
-
+    class func allUserShopLists() -> [ShopList] {
+        let allShopLists = allObjects(context: persistentStore.context) as! [ShopList]
+        return allShopLists
+    }
     // creates a new List having an id, but then it's the user's responsibility
     // to fill in the field values (and eventually save)
     class func addNewShopList() -> ShopList {

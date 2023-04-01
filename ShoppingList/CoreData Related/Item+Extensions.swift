@@ -208,10 +208,24 @@ extension Item {
 		// results are sorted by item name.
 	class func allItemsFR(onList: Bool) -> NSFetchRequest<Item> {
 		let request: NSFetchRequest<Item> = Item.fetchRequest()
-		request.predicate = NSPredicate(format: "onList_ == %d", onList)
+//		request.predicate = NSPredicate(format: "onList_ == %d", onList) // rbq changed this line to select only the locations on a shoplist
+        request.predicate = NSPredicate(format: "(onList_ == %d) AND (%K CONTAINS[cd] %@)", onList, #keyPath(Item.location_.shoplist_.name_), ShopList.masterShopListName())
 		request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
 		return request
 	}
+    // rbq added this list for the purchased list that will now show the circle indicating it is
+    //           on the shopping list screen
+    class func allItemsonShopList() -> NSFetchRequest<Item> {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        request.predicate = NSPredicate(format: "(%K CONTAINS[cd] %@)", #keyPath(Item.location_.shoplist_.name_), ShopList.masterShopListName())
+        request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
+        return request
+    }
+    class func allItemsPreferences() -> NSFetchRequest<Item> {
+        let request: NSFetchRequest<Item> = Item.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
+        return request
+    }
 	
 	// MARK: - Class variable and functions for CRUD operations
 	

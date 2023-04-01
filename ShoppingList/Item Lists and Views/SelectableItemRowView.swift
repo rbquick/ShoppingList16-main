@@ -62,10 +62,20 @@ struct SelectableItemRowView: View {
 						.italic()
 						.strikethrough()
 				}
-				
-				Text(item.locationName)
-					.font(.caption)
-					.foregroundColor(.secondary)
+                // rbq changed 2023-04-01
+                // added the HStack to put a shopping cart on the line if the item
+                //       is on the shopping list
+                HStack {
+                    Text(item.locationName)
+                        .font(.caption)
+                        .foregroundColor(.secondary)
+                    if item.onList {
+                        Spacer()
+                        Image(systemName: "cart")
+                            .foregroundColor(.green)
+                            .font(.subheadline)
+                    }
+                }
 			}
 			
 			Spacer()

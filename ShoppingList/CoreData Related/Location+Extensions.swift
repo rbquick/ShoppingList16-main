@@ -34,7 +34,24 @@ extension Location: Comparable {
 			items.forEach({ $0.objectWillChange.send() })
 		}
 	}
-	
+    var shoplist: ShopList {
+        get {
+            if let shoplist = shoplist_ {
+                return shoplist
+            }
+            // rbq changed 2023-03-31
+            let shoplist_ = ShopList.addNewShopList()
+            shoplist_.name = "unknown"
+            return shoplist_
+//            shoplist_ = ShopList.unknownLocation()
+//            return shoplist_!
+        }
+        set {
+            shoplist_?.objectWillChange.send()
+            shoplist_ = newValue
+            shoplist_?.objectWillChange.send()
+        }
+    }
 	// visitationOrder: fronts Core Data attribute visitationOrder_ that is Int32
 	var visitationOrder: Int {
 		get { Int(visitationOrder_) }
@@ -76,6 +93,8 @@ extension Location: Comparable {
 	var hasItemsOnShoppingList: Bool {
 		items.count(where: { $0.onList }) > 0
 	}
+    // the name of its associated shoplist
+    var shoplistName: String { shoplist_?.name_ ?? "Not Available" }
 
 	// MARK: - Useful Fetch Request
 	
@@ -84,9 +103,18 @@ extension Location: Comparable {
 	// have at least one of its shopping items currently on the shopping list
 	class func allLocationsFR() -> NSFetchRequest<Location> {
 		let request: NSFetchRequest<Location> = Location.fetchRequest()
+        request.predicate = NSPredicate(format: "%K CONTAINS[cd] %@", #keyPath(Location.shoplist_.name_),  ShopList.masterShopListName())
 		request.sortDescriptors = [NSSortDescriptor(key: "visitationOrder_", ascending: true)]
 		return request
 	}
+    // The above is from the original with the shopping list added
+    // the following is from the preferenceview to delete all locations
+    // this should have the ShopList added for the sort
+    class func allLocationsPreferences() -> NSFetchRequest<Location> {
+        let request: NSFetchRequest<Location> = Location.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "visitationOrder_", ascending: true)]
+        return request
+    }
 
 	// MARK: - Class Functions
 	
@@ -125,6 +153,7 @@ extension Location: Comparable {
 		unknownLocation.blue_ = 0.5
 		unknownLocation.opacity_ = 0.5
 		unknownLocation.visitationOrder_ = kUnknownLocationVisitationOrder
+        unknownLocation.shoplist_ = ShopList.masterShopList()
 		return unknownLocation
 	}
 
@@ -135,13 +164,19 @@ extension Location: Comparable {
 		//
 		// so if we ever need to get the unknown location from the database, we will fetch it;
 		// and if it's not there, we will create it then.
+
+//        "(%K CONTAINS[cd] %@)", #keyPath(Location.shoplist_.name_),  ShopList.masterShopListName()
+
+
 		let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "visitationOrder_ == %d", kUnknownLocationVisitationOrder)
+		fetchRequest.predicate = NSPredicate(format: "(visitationOrder_ == %d) AND (%K CONTAINS[cd] %@)", kUnknownLocationVisitationOrder, #keyPath(Location.shoplist_.name_),  ShopList.masterShopListName())
 		do {
 			let locations = try persistentStore.context.fetch(fetchRequest)
-			if locations.count >= 1 { // there should be no more than one
+			if locations.count >= 1 { // there should be no more than one"
+                print("Unknown location Got shoplist = \(locations[0].shoplist_?.name ?? "unknown shoplist")")
 				return locations[0]
 			} else {
+                print("Unknown location being created")
 				return createUnknownLocation()
 			}
 		} catch let error as NSError {

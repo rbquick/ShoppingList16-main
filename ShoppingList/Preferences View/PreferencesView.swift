@@ -25,6 +25,7 @@ struct PreferencesView: View {
 	@EnvironmentObject private var persistentStore: PersistentStore
 	
 	@State private var confirmDataHasBeenAdded = false
+    @State private var shoplistsAdded: Int = 0
 	@State private var locationsAdded: Int = 0
 	@State private var itemsAdded: Int = 0
 	
@@ -38,12 +39,12 @@ struct PreferencesView: View {
 
     // rbq added 2023-03-30
     // this is the @FetchRequest that ties this view to CoreData Locations
-    @FetchRequest(fetchRequest: Location.allLocationsFR())
+    @FetchRequest(fetchRequest: ShopList.allShopListsFR())
+    private var shoplists: FetchedResults<ShopList>
+    @FetchRequest(fetchRequest: Location.allLocationsPreferences())
     private var locations: FetchedResults<Location>
-    @FetchRequest(fetchRequest: Item.allItemsFR(onList: true))
-    private var itemsOnList: FetchedResults<Item>
-    @FetchRequest(fetchRequest: Item.allItemsFR(onList: false))
-    private var itemsOffList: FetchedResults<Item>
+    @FetchRequest(fetchRequest: Item.allItemsPreferences())
+    private var items: FetchedResults<Item>
 	var body: some View {
 		Form {
 			Section(header: Text("Purchased Items History Mark"),
@@ -84,7 +85,7 @@ struct PreferencesView: View {
                             deleteAllData()
                         }
                         .hCentered()
-                        .disabled(Item.count() == 0)
+                        .disabled(ShopList.count() == 0)
 					} // end of List
 					.listRowSeparator(.automatic)
 				} // end of Section
@@ -99,9 +100,11 @@ struct PreferencesView: View {
 	} // end of var body: some View
 	
 	func loadSampleData() {
+        let currentShopListCount = ShopList.count() // rbq added 2023-03-31
 		let currentLocationCount = Location.count() // what it is now
 		let currentItemCount = Item.count() // what it is now
 		populateDatabaseFromJSON(persistentStore: persistentStore)
+        shoplistsAdded = ShopList.count() - currentShopListCount // rbq added 2023-03-31
 		locationsAdded = Location.count() - currentLocationCount // now the differential
 		itemsAdded = Item.count() - currentItemCount // now the differential
 		confirmDataHasBeenAdded = true
@@ -115,17 +118,17 @@ struct PreferencesView: View {
     // rbq added 2023-03-30
     // delete all the items on and off the list before the locations
     func deleteAllData() {
-        print("Items On:  \(itemsOnList.count)")
-        for item in itemsOnList {
-            Item.delete(item)
-        }
-        print("Items Off: \(itemsOffList.count)")
-        for item in itemsOffList {
+        print("Items On:  \(items.count)")
+        for item in items {
             Item.delete(item)
         }
         print("Locations: \(locations.count)")
         for location in locations {
             Location.delete(location)
+        }
+        print("ShopLists: \(shoplists.count)")
+        for shoplist in shoplists {
+            ShopList.delete(shoplist)
         }
     }
 }

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		71A68EA229D639F800F97996 /* ShopList+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A68EA129D639F800F97996 /* ShopList+Extensions.swift */; };
 		71A68EA429D641A800F97996 /* DraftList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A68EA329D641A800F97996 /* DraftList.swift */; };
+		71A68EA729D6F7F300F97996 /* shoplists.json in Resources */ = {isa = PBXBuildFile; fileRef = 71A68EA629D6F7F300F97996 /* shoplists.json */; };
+		71A68EA929D6FFC000F97996 /* ShopListCodableProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A68EA829D6FFC000F97996 /* ShopListCodableProxy.swift */; };
 		D606198124815F8C005CE575 /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = D606198024815F8C005CE575 /* LICENSE */; };
 		D60F14A724686BA80077AD3F /* ItemCodableProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60F14A624686BA80077AD3F /* ItemCodableProxy.swift */; };
 		D60F14A924686D710077AD3F /* LocationCodableProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60F14A824686D710077AD3F /* LocationCodableProxy.swift */; };
@@ -66,6 +68,8 @@
 /* Begin PBXFileReference section */
 		71A68EA129D639F800F97996 /* ShopList+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShopList+Extensions.swift"; sourceTree = "<group>"; };
 		71A68EA329D641A800F97996 /* DraftList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftList.swift; sourceTree = "<group>"; };
+		71A68EA629D6F7F300F97996 /* shoplists.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shoplists.json; sourceTree = "<group>"; };
+		71A68EA829D6FFC000F97996 /* ShopListCodableProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListCodableProxy.swift; sourceTree = "<group>"; };
 		D606198024815F8C005CE575 /* LICENSE */ = {isa = PBXFileReference; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		D60F14A624686BA80077AD3F /* ItemCodableProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemCodableProxy.swift; sourceTree = "<group>"; };
 		D60F14A824686D710077AD3F /* LocationCodableProxy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationCodableProxy.swift; sourceTree = "<group>"; };
@@ -195,6 +199,7 @@
 				D62B88332451162E0051A7CE /* Assets.xcassets */,
 				D62B88382451162E0051A7CE /* LaunchScreen.storyboard */,
 				D6ADB3B1247C266E00376271 /* locations.json */,
+				71A68EA629D6F7F300F97996 /* shoplists.json */,
 				D6ADB3B3247C267900376271 /* items.json */,
 				D62B883B2451162E0051A7CE /* Info.plist */,
 				D61434382763AA33009CC73B /* ShoppingList.entitlements */,
@@ -240,6 +245,7 @@
 				D6EF5586246D97C3007D636B /* Development.swift */,
 				D60F14A624686BA80077AD3F /* ItemCodableProxy.swift */,
 				D60F14A824686D710077AD3F /* LocationCodableProxy.swift */,
+				71A68EA829D6FFC000F97996 /* ShopListCodableProxy.swift */,
 			);
 			path = Development;
 			sourceTree = "<group>";
@@ -387,6 +393,7 @@
 				D664DF8E296C6B3B00960992 /* Img005.jpg in Resources */,
 				D6ADB3B2247C266F00376271 /* locations.json in Resources */,
 				D62B88342451162E0051A7CE /* Assets.xcassets in Resources */,
+				71A68EA729D6F7F300F97996 /* shoplists.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -408,6 +415,7 @@
 				D641BAC52761855C0001371D /* DraftItemForm.swift in Sources */,
 				D6931D6C24C4C60900A61BB6 /* TimerView.swift in Sources */,
 				D6DC6FF6299FEDED00AC59EF /* View+Extensions.swift in Sources */,
+				71A68EA929D6FFC000F97996 /* ShopListCodableProxy.swift in Sources */,
 				71A68EA429D641A800F97996 /* DraftList.swift in Sources */,
 				D6CD65E025D09AA5006F8FAF /* ItemListView.swift in Sources */,
 				D641BAC3276182D50001371D /* AddINewtemView.swift in Sources */,

@@ -17,6 +17,7 @@ struct LocationCodableProxy: Codable {
 	var green: Double
 	var blue: Double
 	var opacity: Double
+    var shoplistName: String
 
 	init(from location: Location) {
 		name = location.name
@@ -25,5 +26,6 @@ struct LocationCodableProxy: Codable {
 		green = location.green_
 		blue = location.blue_
 		opacity = location.opacity_
+        shoplistName = location.shoplistName
 	}
 }

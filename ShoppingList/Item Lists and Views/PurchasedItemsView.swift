@@ -27,13 +27,17 @@ struct PurchasedItemsView: View {
 		// MARK: - @FetchRequest
 	
 		// this is the @FetchRequest that ties this view to CoreData
-	@FetchRequest(fetchRequest: Item.allItemsFR(onList: false))
+//	@FetchRequest(fetchRequest: Item.allItemsFR(onList: false))
+    // rbq changed this call to get ALL the items since they will be shown
+    //     in the circle if they are already selected for the shopping list
+    @FetchRequest(fetchRequest: Item.allItemsonShopList())
 	private var items: FetchedResults<Item>
 	
 		// MARK: - @State and @AppStorage Properties
 
 		// the usual @State variables to handle the Search field
 	@State private var searchText: String = ""
+    @State private var mysearchText: String = ""
 	
 		// trigger for sheet used to add a new shopping item
 	@State private var isAddNewItemSheetPresented = false
@@ -60,6 +64,7 @@ struct PurchasedItemsView: View {
 			if items.count == 0 {
 				EmptyListView(listName: "Purchased")
 			} else {
+                Text(mysearchText)
 				ItemListView(itemSections: itemSections,
 										 sfSymbolName: "cart",
 										 multiSectionDisplay: $multiSectionDisplay)
@@ -68,14 +73,19 @@ struct PurchasedItemsView: View {
 			Divider() // keeps list from overrunning the tab bar in iOS 15
 		} // end of VStack
 		.searchable(text: $searchText)
+        .onSubmit(of: .search) {
+            mysearchText = searchText
+            isAddNewItemSheetPresented = true
+        }
 		.onAppear(perform: handleOnAppear)
 		.onDisappear(perform: handleDisappear)
-		.navigationBarTitle("Purchased List")
+        //rbq changed 2023-03-31 put the ShopList name instead of generic List
+		.navigationBarTitle("\(ShopList.masterShopListName()) Purchased")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 		}
 		.sheet(isPresented: $isAddNewItemSheetPresented) {
-			AddNewItemView()
+			AddNewItemView(suggestedName: mysearchText)
 		}
 	} // end of var body: some View
 

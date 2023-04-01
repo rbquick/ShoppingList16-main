@@ -1,5 +1,6 @@
 [
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.5,
 		"visitationOrder" : 9,
 		"red" : 0.92485547065734863,
@@ -8,6 +9,7 @@
 		"green" : 0.89595377445220947
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.10000000000000001,
 		"visitationOrder" : 89,
 		"red" : 0.90000000000000002,
@@ -16,6 +18,7 @@
 		"green" : 0.10000000000000001
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.40000000000000002,
 		"visitationOrder" : 25,
 		"red" : 0,
@@ -24,6 +27,7 @@
 		"green" : 0
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.40000000000000002,
 		"visitationOrder" : 82,
 		"red" : 1,
@@ -32,6 +36,7 @@
 		"green" : 0.41040462255477905
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.53468209505081177,
 		"visitationOrder" : 4,
 		"red" : 0.060693640261888504,
@@ -40,6 +45,7 @@
 		"green" : 0.9190751314163208
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.52601158618927002,
 		"visitationOrder" : 8,
 		"red" : 0.90000000000000002,
@@ -48,6 +54,7 @@
 		"green" : 0.89595377445220947
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.10000000000000001,
 		"visitationOrder" : 53,
 		"red" : 0.90000000000000002,
@@ -56,6 +63,7 @@
 		"green" : 0.10000000000000001
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.10000000000000001,
 		"visitationOrder" : 70,
 		"red" : 0.90000000000000002,
@@ -64,6 +72,7 @@
 		"green" : 0.10000000000000001
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.28901734948158264,
 		"visitationOrder" : 75,
 		"red" : 1,
@@ -72,6 +81,7 @@
 		"green" : 0
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.54335260391235352,
 		"visitationOrder" : 64,
 		"red" : 1,
@@ -80,6 +90,7 @@
 		"green" : 0.10000000000000001
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.10000000000000001,
 		"visitationOrder" : 85,
 		"red" : 0,
@@ -88,6 +99,7 @@
 		"green" : 0.65606933832168579
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.28034681081771851,
 		"visitationOrder" : 76,
 		"red" : 1,
@@ -96,6 +108,7 @@
 		"green" : 0
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.65,
 		"visitationOrder" : 18,
 		"red" : 0.0,
@@ -104,6 +117,7 @@
 		"green" : 0.1
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.53757226467132568,
 		"visitationOrder" : 65,
 		"red" : 1,
@@ -112,6 +126,7 @@
 		"green" : 0.10115607082843781
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.40000000000000002,
 		"visitationOrder" : 100,
 		"red" : 0.25,
@@ -120,6 +135,7 @@
 		"green" : 0.25
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.5,
 		"visitationOrder" : 60,
 		"red" : 0.5,
@@ -128,6 +144,7 @@
 		"green" : 0.5
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.10982658714056015,
 		"visitationOrder" : 80,
 		"red" : 0.5,
@@ -136,6 +153,7 @@
 		"green" : 0.5
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.36127167940139771,
 		"visitationOrder" : 45,
 		"red" : 0,
@@ -144,6 +162,7 @@
 		"green" : 0
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.53468209505081177,
 		"visitationOrder" : 30,
 		"red" : 0.78323698043823242,
@@ -152,6 +171,7 @@
 		"green" : 0.81213873624801636
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.11560693383216858,
 		"visitationOrder" : 5,
 		"red" : 0.25,
@@ -160,6 +180,7 @@
 		"green" : 0.25
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.15606936812400818,
 		"visitationOrder" : 21,
 		"red" : 0,
@@ -168,6 +189,7 @@
 		"green" : 1
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.22832369804382324,
 		"visitationOrder" : 15,
 		"red" : 0.89306360483169556,
@@ -176,6 +198,7 @@
 		"green" : 0.10000000000000001
 	},
 	{
+        "shoplistName" : "Costco",
 		"opacity" : 0.15895953774452209,
 		"visitationOrder" : 59,
 		"red" : 0.24855491518974304,

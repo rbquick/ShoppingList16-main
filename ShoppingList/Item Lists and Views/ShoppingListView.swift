@@ -77,7 +77,8 @@ struct ShoppingListView: View {
 			} //end of if items.count > 0
 			
 		} // end of VStack
-		.navigationBarTitle("Shopping List")
+        // rbq changed 2023-03-31 put the shoplist name instead of "Shopping"
+        .navigationBarTitle("\(ShopList.masterShopListName()) List")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing, content: trailingButtons)
 		}

@@ -62,7 +62,9 @@ struct ShoppingListApp: App {
 		let store = PersistentStore()
 		Item.persistentStore = store
 		Location.persistentStore = store
+        ShopList.persistentStore = store
 		_persistentStore = StateObject(wrappedValue: store)
+        whereIsMySQLite()
 	}
 	
 	var body: some Scene {
@@ -76,7 +78,20 @@ struct ShoppingListApp: App {
 				.onReceive(enterForegroundPublisher, perform: handleBecomeActive)
 		}
 	}
-	
+    // rbq added 2023-03-31
+    // got this from from a stackoverflow answer for where is my core data database
+    // https://stackoverflow.com/questions/10239634/how-can-i-check-what-is-stored-in-my-core-data-database
+    func whereIsMySQLite() {
+        let path = FileManager
+            .default
+            .urls(for: .applicationSupportDirectory, in: .userDomainMask)
+            .last?
+            .absoluteString
+            .replacingOccurrences(of: "file://", with: "")
+            .removingPercentEncoding
+
+        print(path ?? "Not found")
+    }
 	func handleResignActive(_ note: Notification) {
 			// when going into background, save Core Data and shut down timer
 		persistentStore.save()
