@@ -11,13 +11,16 @@ import SwiftUI
 // see AddNewItemView.swift for similar comments and explanation of how this works
 struct AddNewLocationView: View {
 	
-	@Environment(\.dismiss) var dismiss
-	@EnvironmentObject private var persistentStore: PersistentStore
+	@Environment(\.dismiss) private var dismiss
 	
 		// a draftLocation is initialized here, holding default values for
 		// a new Location.
-	@StateObject private var draftLocation = DraftLocation()
-	
+    @StateObject private var draftLocation: DraftLocation
+
+    init(suggestedName: String? = nil, shoplist: ShopList? = nil) {
+        let initialValue = DraftLocation(suggestedName: suggestedName, shoplist: shoplist)
+        _draftLocation = StateObject(wrappedValue: initialValue)
+    }
 	var body: some View {
 		NavigationStack {
 			DraftLocationForm(draftLocation: draftLocation)
@@ -28,7 +31,6 @@ struct AddNewLocationView: View {
 					ToolbarItem(placement: .cancellationAction, content: cancelButton)
 					ToolbarItem(placement: .confirmationAction) { saveButton().disabled(!draftLocation.canBeSaved) }
 				}
-				.onDisappear { persistentStore.save() }
 		}
 	}
 	

@@ -20,6 +20,7 @@ class DraftLocation: ObservableObject {
 	@Published var locationName: String = ""
 	@Published var visitationOrder: Int = 50
 	@Published var color: Color = .green
+   // @Published var shoplist: ShopList
 	
 		// this copies all the editable data from an incoming Location
 	init(location: Location? = nil) {
@@ -30,6 +31,14 @@ class DraftLocation: ObservableObject {
 			color = location.color
 		}
 	}
+    init(suggestedName: String? = nil, shoplist: ShopList? = nil) {
+        if let suggestedName, suggestedName.count > 0 {
+            locationName = suggestedName
+        }
+//        if let shoplist = shoplist {
+//            self.shoplist = shoplist
+//        }
+    }
 	
 		// to do a save/commit of an Item, it must have a non-empty name
 	var canBeSaved: Bool { locationName.count > 0 }

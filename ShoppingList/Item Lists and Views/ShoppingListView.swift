@@ -44,7 +44,7 @@ struct ShoppingListView: View {
 		// user default for whether we are a multi-section display or not.
 	@AppStorage(kShoppingListIsMultiSectionKey)
 	private var multiSectionDisplay: Bool = kShoppingListIsMultiSectionDefaultValue
-	
+
 		// MARK: - BODY
 
 	var body: some View {
@@ -78,7 +78,7 @@ struct ShoppingListView: View {
 			
 		} // end of VStack
         // rbq changed 2023-03-31 put the shoplist name instead of "Shopping"
-        .navigationBarTitle("\(ShopList.masterShopListName()) List")
+        .navigationBarTitle("\(MyDefaults().myMasterShopListName) List")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing, content: trailingButtons)
 		}
@@ -176,7 +176,7 @@ struct ShoppingListView: View {
 		if !multiSectionDisplay {
 			return [ItemSection(index: 1,
 													title: "Items Remaining: \(items.count)",
-													items: locationItemPairs.flatMap{( $0.items )})
+                                items: locationItemPairs.flatMap{( $0.items )} .sorted(by: {$0.name < $1.name}))
 			]
 		}
 		// for multiple sections, we mostly have what we need, but must add an indexing

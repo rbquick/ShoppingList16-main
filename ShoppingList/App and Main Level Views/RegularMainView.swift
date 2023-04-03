@@ -17,6 +17,7 @@ struct RegularMainView: View {
 	enum NavigationItem {
 		case shoppingList
 		case purchasedList
+        case shopListList           // rbq added 2023-04-01
 		case locationList
 		case inStoreTimer
 		case preferences
@@ -32,6 +33,9 @@ struct RegularMainView: View {
 			
 			Label("Purchased", systemImage: "purchased")
 				.tag(NavigationItem.purchasedList)
+            // rbq added 2023-04-01
+            Label("Lists", systemImage: "list.bullet.rectangle.portrait")
+                .tag(NavigationItem.shopListList)
 			
 			Label("Locations", systemImage: "map")
 				.tag(NavigationItem.locationList)
@@ -56,6 +60,9 @@ struct RegularMainView: View {
 						ShoppingListView()
 					case .purchasedList:
 						PurchasedItemsView()
+                    // rbq added 2023-04-01
+                    case .shopListList:
+                        ShopListsView(mastershoplistname: mastershoplistname())
 					case .locationList:
 						LocationsView()
 					case .inStoreTimer:

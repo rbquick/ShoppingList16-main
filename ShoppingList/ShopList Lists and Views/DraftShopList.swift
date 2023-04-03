@@ -25,6 +25,11 @@ class DraftShopList: ObservableObject {
             shoplistName = shoplist.name
         }
     }
+    init(suggestedName: String? = nil) {
+        if let suggestedName, suggestedName.count > 0 {
+            shoplistName = suggestedName
+        }
+    }
 
     // to do a save/commit of an Item, it must have a non-empty name
     var canBeSaved: Bool { shoplistName.count > 0 }

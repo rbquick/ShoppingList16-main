@@ -209,7 +209,7 @@ extension Item {
 	class func allItemsFR(onList: Bool) -> NSFetchRequest<Item> {
 		let request: NSFetchRequest<Item> = Item.fetchRequest()
 //		request.predicate = NSPredicate(format: "onList_ == %d", onList) // rbq changed this line to select only the locations on a shoplist
-        request.predicate = NSPredicate(format: "(onList_ == %d) AND (%K CONTAINS[cd] %@)", onList, #keyPath(Item.location_.shoplist_.name_), ShopList.masterShopListName())
+        request.predicate = NSPredicate(format: "(onList_ == %d) AND (%K CONTAINS[cd] %@)", onList, #keyPath(Item.location_.shoplist_.name_), MyDefaults().myMasterShopListName)
 		request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
 		return request
 	}
@@ -217,7 +217,7 @@ extension Item {
     //           on the shopping list screen
     class func allItemsonShopList() -> NSFetchRequest<Item> {
         let request: NSFetchRequest<Item> = Item.fetchRequest()
-        request.predicate = NSPredicate(format: "(%K CONTAINS[cd] %@)", #keyPath(Item.location_.shoplist_.name_), ShopList.masterShopListName())
+        request.predicate = NSPredicate(format: "(%K CONTAINS[cd] %@)", #keyPath(Item.location_.shoplist_.name_), MyDefaults().myMasterShopListName)
         request.sortDescriptors = [NSSortDescriptor(key: "name_", ascending: true)]
         return request
     }

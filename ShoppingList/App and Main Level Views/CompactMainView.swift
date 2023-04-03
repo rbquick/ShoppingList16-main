@@ -22,6 +22,9 @@ struct CompactMainView: View {
 			
 			NavigationStack { PurchasedItemsView() }
 				.tabItem { Label("Purchased", systemImage: "purchased") }
+            // rbq added 2023-04-01
+            NavigationStack { ShopListsView(mastershoplistname: mastershoplistname()) }
+                .tabItem { Label("Lists", systemImage: "list.bullet.rectangle.portrait") }
 
 			NavigationStack { LocationsView() }
 				.tabItem { Label("Locations", systemImage: "map") }

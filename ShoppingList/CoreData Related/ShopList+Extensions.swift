@@ -42,19 +42,11 @@ extension ShopList: Comparable {
 
     // MARK: - Useful Fetch Request
 
-    // This will return the name of the currectly active ShopList
-    // this is set up on the shoplistView that I haven't created yet
-    class func masterShopListName() -> String {
-        let master = masterShopList()
-        return master.name
-    }
     // This will get the current ShopList eventually using the selected item of the shoplists
     // for testing it is just manually selected here
     class func masterShopList() -> ShopList {
-        // this has to go somewhere
-        let MasterShopListName = "Costco"
         let myshoplists = allUserShopLists()
-        if let index = myshoplists.firstIndex(where: { $0.name == MasterShopListName } ) {
+        if let index = myshoplists.firstIndex(where: { $0.name == MyDefaults().myMasterShopListName } ) {
             return myshoplists[index]
         } else {
             let newshoplist = ShopList.addNewShopList()

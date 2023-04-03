@@ -18,9 +18,19 @@ let kShoppingListIsMultiSectionKey = "kShoppingListIsMultiSectionKey"
 let kPurchasedListIsMultiSectionKey = "kPurchasedListIsMultiSectionKey"
 let kPurchasedMostRecentlyKey = "kPurchasedMostRecentlyKey"
 let kDisableTimerWhenInBackgroundKey = "kDisableTimerWhenInBackgroundKey"
+let kMasterShopListNameKey = "kMasterShopListNameKey"
 
 // @AppStorage default values
 let kShoppingListIsMultiSectionDefaultValue = false
 let kPurchasedListIsMultiSectionDefaultValue = false
 let kPurchasedMostRecentlyDefaultValue = 3
 let kDisableTimerWhenInBackgroundDefaultValue = false
+let kMasterShopListNameDefaultValue = "Costco"
+
+class MyDefaults {
+    let defaults = UserDefaults.standard
+    var myMasterShopListName: String {
+        get { return defaults.string(forKey: kMasterShopListNameKey) ?? kMasterShopListNameDefaultValue }
+        set { defaults.setValue(newValue, forKey: kMasterShopListNameKey) }
+    }
+}

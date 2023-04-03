@@ -52,6 +52,7 @@ struct PurchasedItemsView: View {
 	@AppStorage(kPurchasedListIsMultiSectionKey)
 	private var multiSectionDisplay: Bool = kPurchasedListIsMultiSectionDefaultValue
 
+
 		// MARK: - BODY
 
 	var body: some View {
@@ -80,7 +81,7 @@ struct PurchasedItemsView: View {
 		.onAppear(perform: handleOnAppear)
 		.onDisappear(perform: handleDisappear)
         //rbq changed 2023-03-31 put the ShopList name instead of generic List
-		.navigationBarTitle("\(ShopList.masterShopListName()) Purchased")
+        .navigationBarTitle("\(MyDefaults().myMasterShopListName) Purchased")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 		}
