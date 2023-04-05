@@ -39,14 +39,15 @@ extension ShopList: Comparable {
     }
         // itemCount: computed property from Core Data items
     var locationCount: Int { locations_?.count ?? 0 }
-
     // MARK: - Useful Fetch Request
-
+    class func masterShopListName() -> String {
+        return MyDefaults().myMasterShopListName
+    }
     // This will get the current ShopList eventually using the selected item of the shoplists
     // for testing it is just manually selected here
     class func masterShopList() -> ShopList {
         let myshoplists = allUserShopLists()
-        if let index = myshoplists.firstIndex(where: { $0.name == MyDefaults().myMasterShopListName } ) {
+        if let index = myshoplists.firstIndex(where: { $0.name == self.masterShopListName() } ) {
             return myshoplists[index]
         } else {
             let newshoplist = ShopList.addNewShopList()

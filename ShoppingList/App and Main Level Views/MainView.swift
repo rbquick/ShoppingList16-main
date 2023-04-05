@@ -14,6 +14,7 @@ struct MainView: View {
 	@Environment(\.horizontalSizeClass) private var horizontalSizeClass
 	
 	var body: some View {
+//        RegularMainView()
 		if horizontalSizeClass == .compact {
 				// standard tab view for an iPhone in portrait, etc.
 			CompactMainView()
@@ -22,7 +23,7 @@ struct MainView: View {
 				// and it behaves better than before.
 			RegularMainView()
 		}
-		
+
 	}
 }
 

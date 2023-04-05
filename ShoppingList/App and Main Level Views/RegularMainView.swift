@@ -13,29 +13,31 @@ import SwiftUI
 // CompactMainView.
 
 struct RegularMainView: View {
-	
-	enum NavigationItem {
-		case shoppingList
-		case purchasedList
-        case shopListList           // rbq added 2023-04-01
-		case locationList
-		case inStoreTimer
-		case preferences
-	}
+
+    // rbq 2023-04-05 moved this out into it's own file
+//	enum NavigationItem {
+//		case shoppingList
+//		case purchasedList
+//        case shopListList           // rbq added 2023-04-01
+//		case locationList
+//		case inStoreTimer
+//		case preferences
+//	}
 	
 	@State private var selection: NavigationItem? = .shoppingList
 	
 	var sidebarView: some View {
 		List(selection: $selection) {
 			
+            // rbq added 2023-04-01
+            Label("Lists", systemImage: "list.bullet.rectangle.portrait")
+                .tag(NavigationItem.shopListList)
+
 			Label("Shopping List", systemImage: "cart")
 				.tag(NavigationItem.shoppingList)
 			
 			Label("Purchased", systemImage: "purchased")
 				.tag(NavigationItem.purchasedList)
-            // rbq added 2023-04-01
-            Label("Lists", systemImage: "list.bullet.rectangle.portrait")
-                .tag(NavigationItem.shopListList)
 			
 			Label("Locations", systemImage: "map")
 				.tag(NavigationItem.locationList)
@@ -62,7 +64,7 @@ struct RegularMainView: View {
 						PurchasedItemsView()
                     // rbq added 2023-04-01
                     case .shopListList:
-                        ShopListsView(mastershoplistname: mastershoplistname())
+                        ShopListsView()
 					case .locationList:
 						LocationsView()
 					case .inStoreTimer:

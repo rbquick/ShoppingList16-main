@@ -7,14 +7,18 @@
 //
 
 import SwiftUI
+import CoreData
 
-class mastershoplistname: ObservableObject {
-    @Published var mastershoplistname = ""
+class MasterShopListNameClass: ObservableObject {
+    @Published var mastershoplistname = "Costco"
+    init(mastershoplistname: String = "") {
+        self.mastershoplistname = MyDefaults().myMasterShopListName
+    }
 }
 struct ShopListsView: View {
 
     @EnvironmentObject private var persistentStore: PersistentStore
-    @ObservedObject var mastershoplistname: mastershoplistname
+    @EnvironmentObject var mastershoplistname: MasterShopListNameClass
 
     // MARK: - @FetchRequest
 
@@ -25,7 +29,8 @@ struct ShopListsView: View {
     // MARK: - @State and @StateObject Properties
 
     // state to trigger a sheet to appear to add a new location
-@State private var isAddNewShopListSheetPresented = false
+    @State private var isAddNewShopListSheetPresented = false
+
 
     // MARK: - BODY
 
@@ -46,13 +51,12 @@ struct ShopListsView: View {
                 Section(header: Text("Shopping Lists: \(shoplists.count)")) {
                     ForEach(shoplists) { shoplist in
                         NavigationLink(value:shoplist) {
-                            ShopListRowView(shoplist: shoplist, mastershoplistname: mastershoplistname) { setmasterShopList(shoplistName: shoplist.name) }
+                            ShopListRowView(shoplist: shoplist) { setmasterShopList(shoplistName: shoplist.name) }
                         }
                     }
                 }
             }
             .listStyle(InsetGroupedListStyle())
-
             Divider()
         }
         .navigationBarTitle("Lists Available")
@@ -70,7 +74,7 @@ struct ShopListsView: View {
         .onDisappear { persistentStore.save() }
     }
     func handleOnAppear() {
-        mastershoplistname.mastershoplistname = MyDefaults().myMasterShopListName
+
         if shoplists.count == 0 {
             // don't know what to do here with no ShopList?
 //            let _ = ShopList.unknownLocation()
@@ -85,8 +89,8 @@ struct ShopListsView: View {
         }
     }
     func setmasterShopList(shoplistName: String) {
-        mastershoplistname.mastershoplistname = shoplistName
         MyDefaults().myMasterShopListName = shoplistName
+        mastershoplistname.mastershoplistname = shoplistName
     }
 
 }

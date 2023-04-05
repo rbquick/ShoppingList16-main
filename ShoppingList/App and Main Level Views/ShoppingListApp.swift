@@ -48,6 +48,7 @@ struct ShoppingListApp: App {
 	@StateObject var persistentStore: PersistentStore
 	@StateObject var today = Today()
 	@StateObject var inStoreTimer = InStoreTimer()
+    @StateObject var mastershoplistname = MasterShopListNameClass()
 	
 	let resignActivePublisher =
 		NotificationCenter.default.publisher(for: UIApplication.willResignActiveNotification)
@@ -74,6 +75,7 @@ struct ShoppingListApp: App {
 				.environmentObject(persistentStore)
 				.environmentObject(today)
 				.environmentObject(inStoreTimer)
+                .environmentObject(mastershoplistname)
 				.onReceive(resignActivePublisher, perform: handleResignActive)
 				.onReceive(enterForegroundPublisher, perform: handleBecomeActive)
 		}

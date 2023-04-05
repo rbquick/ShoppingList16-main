@@ -21,6 +21,7 @@ struct PurchasedItemsView: View {
 		// link in to what is the start of today
 	@EnvironmentObject var today: Today
 	@EnvironmentObject private var persistentStore: PersistentStore
+    @EnvironmentObject var mastershoplistname: MasterShopListNameClass
 		// the value of Calendar.current is in the environment
 	@Environment(\.calendar) private var calendar
 	
@@ -32,7 +33,7 @@ struct PurchasedItemsView: View {
     //     in the circle if they are already selected for the shopping list
     @FetchRequest(fetchRequest: Item.allItemsonShopList())
 	private var items: FetchedResults<Item>
-	
+
 		// MARK: - @State and @AppStorage Properties
 
 		// the usual @State variables to handle the Search field
@@ -52,7 +53,7 @@ struct PurchasedItemsView: View {
 	@AppStorage(kPurchasedListIsMultiSectionKey)
 	private var multiSectionDisplay: Bool = kPurchasedListIsMultiSectionDefaultValue
 
-
+    @State private var myshoplist = ""
 		// MARK: - BODY
 
 	var body: some View {
@@ -60,7 +61,7 @@ struct PurchasedItemsView: View {
 			
 			Rectangle()
 				.frame(height: 1)
-			
+
 				// display either a "List is Empty" view, or the sectioned list of purchased items.
 			if items.count == 0 {
 				EmptyListView(listName: "Purchased")
@@ -81,7 +82,7 @@ struct PurchasedItemsView: View {
 		.onAppear(perform: handleOnAppear)
 		.onDisappear(perform: handleDisappear)
         //rbq changed 2023-03-31 put the ShopList name instead of generic List
-        .navigationBarTitle("\(MyDefaults().myMasterShopListName) Purchased")
+        .navigationBarTitle("\(mastershoplistname.mastershoplistname) Purchased")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 		}
@@ -104,6 +105,7 @@ struct PurchasedItemsView: View {
 	func handleOnAppear() {
 		searchText = "" // clear searchText, get a clean screen
 		today.update() // also recompute what "today" means, so the sectioning is correct
+        myshoplist = ShopList.masterShopListName()
 	}
 	
 	func handleDisappear() {
@@ -119,6 +121,7 @@ struct PurchasedItemsView: View {
 		// -- those items purchased within the last N days,
 		// -- and everything else
 	var itemSections: [ItemSection] {
+        print("PurchasedItemsView.itemSection called mastername\(ShopList.masterShopListName())")
 			// reduce items by search criteria
 		let searchQualifiedItems = items.filter({ searchText.appearsIn($0.name) })
 		

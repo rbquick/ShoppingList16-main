@@ -20,7 +20,7 @@ class DraftLocation: ObservableObject {
 	@Published var locationName: String = ""
 	@Published var visitationOrder: Int = 50
 	@Published var color: Color = .green
-   // @Published var shoplist: ShopList
+    @Published var shoplist = ShopList.masterShopList()
 	
 		// this copies all the editable data from an incoming Location
 	init(location: Location? = nil) {

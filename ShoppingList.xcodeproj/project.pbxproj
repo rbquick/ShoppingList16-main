@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7113284429DE217D00CC280D /* NavigationItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7113284329DE217D00CC280D /* NavigationItem.swift */; };
 		71A68EA229D639F800F97996 /* ShopList+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A68EA129D639F800F97996 /* ShopList+Extensions.swift */; };
 		71A68EA429D641A800F97996 /* DraftShopList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71A68EA329D641A800F97996 /* DraftShopList.swift */; };
 		71A68EA729D6F7F300F97996 /* shoplists.json in Resources */ = {isa = PBXBuildFile; fileRef = 71A68EA629D6F7F300F97996 /* shoplists.json */; };
@@ -71,6 +72,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7113284329DE217D00CC280D /* NavigationItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationItem.swift; sourceTree = "<group>"; };
 		71A68EA129D639F800F97996 /* ShopList+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ShopList+Extensions.swift"; sourceTree = "<group>"; };
 		71A68EA329D641A800F97996 /* DraftShopList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftShopList.swift; sourceTree = "<group>"; };
 		71A68EA629D6F7F300F97996 /* shoplists.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = shoplists.json; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				D64387F7299548290084B354 /* MainView.swift */,
 				D6B8A95324636711005F8EF2 /* CompactMainView.swift */,
 				D64387F92995492D0084B354 /* RegularMainView.swift */,
+				7113284329DE217D00CC280D /* NavigationItem.swift */,
 			);
 			path = "App and Main Level Views";
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				D648D349246388C100CD881B /* Location+Extensions.swift in Sources */,
 				D61434412763BAA1009CC73B /* AddNewLocationView.swift in Sources */,
 				D64898E924B0E95E008FE512 /* PersistentStore.swift in Sources */,
+				7113284429DE217D00CC280D /* NavigationItem.swift in Sources */,
 				D6B753162766976C0050AF52 /* SectionHeaderButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

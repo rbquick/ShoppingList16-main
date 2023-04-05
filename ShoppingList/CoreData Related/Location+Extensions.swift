@@ -103,7 +103,7 @@ extension Location: Comparable {
 	// have at least one of its shopping items currently on the shopping list
 	class func allLocationsFR() -> NSFetchRequest<Location> {
 		let request: NSFetchRequest<Location> = Location.fetchRequest()
-        request.predicate = NSPredicate(format: "%K CONTAINS[cd] %@", #keyPath(Location.shoplist_.name_),  MyDefaults().myMasterShopListName)
+        request.predicate = NSPredicate(format: "%K CONTAINS[cd] %@", #keyPath(Location.shoplist_.name_),  ShopList.masterShopListName())
 		request.sortDescriptors = [NSSortDescriptor(key: "visitationOrder_", ascending: true)]
 		return request
 	}
@@ -166,7 +166,7 @@ extension Location: Comparable {
 		// and if it's not there, we will create it then.
 
 		let fetchRequest: NSFetchRequest<Location> = Location.fetchRequest()
-		fetchRequest.predicate = NSPredicate(format: "(visitationOrder_ == %d) AND (%K CONTAINS[cd] %@)", kUnknownLocationVisitationOrder, #keyPath(Location.shoplist_.name_),  MyDefaults().myMasterShopListName)
+        fetchRequest.predicate = NSPredicate(format: "(visitationOrder_ == %d) AND (%K CONTAINS[cd] %@)", kUnknownLocationVisitationOrder, #keyPath(Location.shoplist_.name_),  ShopList.masterShopListName())
 		do {
 			let locations = try persistentStore.context.fetch(fetchRequest)
 			if locations.count >= 1 { // there should be no more than one"
@@ -246,6 +246,7 @@ extension Location: Comparable {
 			blue_ = 0.0
 			opacity_ = 0.5
 		}
+        shoplist_ = ShopList.masterShopList()
 		
 	}
 	

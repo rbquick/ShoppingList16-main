@@ -11,12 +11,12 @@ import SwiftUI
 struct ShopListRowView: View {
 
     @ObservedObject var shoplist: ShopList
-    @ObservedObject var mastershoplistname: mastershoplistname
+    @EnvironmentObject var mastershoplistname: MasterShopListNameClass
     var tapAction: () -> ()
 
     var body: some View {
         HStack {
-            VStack(alignment: .leading) {
+
                 // --- build the little circle to tap on the left
             ZStack {
                     // not sure if i want to have at least a visible circle here at the bottom layer or not.  for
@@ -24,7 +24,7 @@ struct ShopListRowView: View {
                     //                Circle()
                     //                    .stroke(Color(.systemGray6))
                     //                    .frame(width: 28.5, height: 28.5)
-                if shoplist.name == MyDefaults().myMasterShopListName {
+                if shoplist.name == mastershoplistname.mastershoplistname {
                     Image(systemName: "circle.fill")
                         .foregroundColor(.blue)
                         .font(.title)
@@ -33,15 +33,16 @@ struct ShopListRowView: View {
                     //                    .foregroundColor(Color(item.uiColor))
                     .foregroundColor(.blue)
                     .font(.title)
-                if shoplist.name == MyDefaults().myMasterShopListName {
+                if shoplist.name == mastershoplistname.mastershoplistname {
                     Image(systemName: "list.bullet.rectangle.portrait")
                         .foregroundColor(.white)
                         .font(.subheadline)
                 }
             } // end of ZStack
-            .animation(.easeInOut, value: shoplist.name == MyDefaults().myMasterShopListName)
+            .animation(.easeInOut, value: shoplist.name == mastershoplistname.mastershoplistname)
             .frame(width: 24, height: 24)
             .onTapGesture(perform: tapAction)
+            VStack(alignment: .leading) {
                 Text(shoplist.name)
                     .font(.headline)
                 Text(subtitle())

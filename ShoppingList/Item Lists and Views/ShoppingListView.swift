@@ -12,7 +12,7 @@ import SwiftUI
 struct ShoppingListView: View {
 	
 	@EnvironmentObject private var persistentStore: PersistentStore
-	
+    @EnvironmentObject var mastershoplistname: MasterShopListNameClass
 		// MARK: - @FetchRequests
 	
 		// this is the @FetchRequest that ties this view to CoreData Items
@@ -48,6 +48,7 @@ struct ShoppingListView: View {
 		// MARK: - BODY
 
 	var body: some View {
+        let _ = Self._printChanges()
 		VStack(spacing: 0) {
 			
 			Rectangle()
@@ -78,13 +79,14 @@ struct ShoppingListView: View {
 			
 		} // end of VStack
         // rbq changed 2023-03-31 put the shoplist name instead of "Shopping"
-        .navigationBarTitle("\(MyDefaults().myMasterShopListName) List")
+        .navigationBarTitle("\(mastershoplistname.mastershoplistname) List")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing, content: trailingButtons)
 		}
 		.sheet(isPresented: $isAddNewItemSheetPresented) {
 			AddNewItemView()
 		}
+        .onAppear(perform: handleOnAppear)
 		.onDisappear(perform: handleDisappear)
 		
 	} // end of body: some View
@@ -130,7 +132,9 @@ struct ShoppingListView: View {
 	}
 
 	// MARK: - Helper Functions
-	
+    func handleOnAppear() {
+        print("ShoppingListView.onappear \(ShopList.masterShopListName())")
+    }
 	private func handleDisappear() {
 			// we save when this view goes off-screen.  we could use a more aggressive
 			// strategy for saving data out to persistent storage, but saving here should
@@ -160,6 +164,7 @@ struct ShoppingListView: View {
 		// (locations with no items on the list will be ignored, and we sort by visitationOrder).
 		// however, we do this based on the values in the `locations` @FetchRequest
 		// property and not the item's properties (e.g., location).
+        print("shoppinglistview.itemSection called mastername: \(ShopList.masterShopListName())")
 		let locationItemPairs: [(location: Location, items: [Item])] = locations
 			.map({ location in
 				( location, location.items.filter({ $0.onList }) )
