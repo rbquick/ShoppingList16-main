@@ -18,13 +18,13 @@ import CoreData
 #if targetEnvironment(simulator)
 	let kShowDevTools = true
 #else
-let kShowDevTools = true    // rbq changed 2023-04-01
+let kShowDevTools = false
 #endif
 
 // i used these constants and functions below during development to import and
 // export Items and Locations via JSON.  these are the filenames for JSON output
 // when dumped from the simulator and also the filenames in the bundle used to load sample data.
-let kJSONDumpDirectory = "/Users/YOUR USERNAME HERE/Desktop/"	// dumps to the Desktop: Adjust for your Username!
+let kJSONDumpDirectory = "/Users/rbq/Desktop/"	// dumps to the Desktop: Adjust for your Username!
 let kItemsFilename = "items.json"
 let kLocationsFilename = "locations.json"
 let kShopListsFilename = "shoplists.json"

@@ -11,6 +11,7 @@ import SwiftUI
 struct LocationsView: View {
 	
 	@EnvironmentObject private var persistentStore: PersistentStore
+    @EnvironmentObject var mastershoplistname: MasterShopListNameClass
 
 		// MARK: - @FetchRequest
 
@@ -53,7 +54,7 @@ struct LocationsView: View {
 			
 			Divider() // keeps list from running through tab bar (!)
 		} // end of VStack
-		.navigationBarTitle("Locations")
+		.navigationBarTitle("\(mastershoplistname.mastershoplistname) Locations")
 		.navigationDestination(for: Location.self) { location in
 			ModifyExistingLocationView(location: location)
 		}

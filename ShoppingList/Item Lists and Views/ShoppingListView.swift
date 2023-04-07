@@ -48,7 +48,9 @@ struct ShoppingListView: View {
 		// MARK: - BODY
 
 	var body: some View {
-        let _ = Self._printChanges()
+        // debugging tool to display what has changed on this view to get a refresh
+        //           do not leave in when distributing
+        // let _ = Self._printChanges()
 		VStack(spacing: 0) {
 			
 			Rectangle()

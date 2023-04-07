@@ -61,12 +61,17 @@ struct PurchasedItemsView: View {
 			
 			Rectangle()
 				.frame(height: 1)
+            // This is put on the screen invisibly.  If you take this out, the mysearchText field
+            // is empty when you are adding a non-exsistant searched item.
+            // why? ask the wisdom of apple
+            Text(mysearchText)
+                .foregroundColor(.clear)
+                .frame(width: 0, height: 0)
 
 				// display either a "List is Empty" view, or the sectioned list of purchased items.
 			if items.count == 0 {
 				EmptyListView(listName: "Purchased")
 			} else {
-                Text(mysearchText)
 				ItemListView(itemSections: itemSections,
 										 sfSymbolName: "cart",
 										 multiSectionDisplay: $multiSectionDisplay)

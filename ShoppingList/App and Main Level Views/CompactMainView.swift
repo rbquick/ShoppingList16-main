@@ -31,6 +31,7 @@ struct CompactMainView: View {
 
     // what screen do you want to show 1st
     @State private var selection: NavigationItem = .shoppingList
+    @State private var navPath = NavigationPath()
 
     var body: some View {
         NavigationStack {
@@ -81,6 +82,12 @@ struct CompactMainView: View {
         // There s/b be a better was to put the tabview at
         //   the bottom of the screen.
         .frame(height: 40)
+
+        .onAppear(perform: myOnAppear)
+
     } // end of var body: some View
+    func myOnAppear() {
+        navPath.removeLast(navPath.count)
+    }
 }
 

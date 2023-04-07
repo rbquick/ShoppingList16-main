@@ -24,7 +24,28 @@ struct ModifyExistingShopListView: View {
         DraftShopListForm(draftShopList: draftShopList) {
             dismiss()
         }
-
+        .navigationBarTitle("Modify Location")
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading, content: customBackButton)
+        }
+    }
+    func customBackButton() -> some View {
+            //...  see comments in ModifyExistingItemView about using
+            // our own back button.
+        Button {
+            if draftShopList.associatedShopList != nil {
+                ShopList.updateAndSave(using: draftShopList)
+            }
+            persistentStore.save()
+            dismiss()
+        } label: {
+            HStack(spacing: 5) {
+                Image(systemName: "chevron.left")
+                Text("Back")
+            }
+        }
     }
 }
 
