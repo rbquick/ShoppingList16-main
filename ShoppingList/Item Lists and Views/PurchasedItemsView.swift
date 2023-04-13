@@ -70,7 +70,7 @@ struct PurchasedItemsView: View {
 
 				// display either a "List is Empty" view, or the sectioned list of purchased items.
 			if items.count == 0 {
-				EmptyListView(listName: "Purchased")
+				EmptyListView(listName: "Selection")
 			} else {
 				ItemListView(itemSections: itemSections,
 										 sfSymbolName: "cart",
@@ -87,7 +87,7 @@ struct PurchasedItemsView: View {
 		.onAppear(perform: handleOnAppear)
 		.onDisappear(perform: handleDisappear)
         //rbq changed 2023-03-31 put the ShopList name instead of generic List
-        .navigationBarTitle("\(mastershoplistname.mastershoplistname) Purchased")
+        .navigationBarTitle("\(mastershoplistname.mastershoplistname) Selection")
 		.toolbar {
 			ToolbarItem(placement: .navigationBarTrailing, content: addNewButton)
 		}

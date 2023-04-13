@@ -36,7 +36,7 @@ struct RegularMainView: View {
 			Label("Shopping List", systemImage: "cart")
 				.tag(NavigationItem.shoppingList)
 			
-			Label("Purchased", systemImage: "purchased")
+			Label("Selection", systemImage: "purchased")
 				.tag(NavigationItem.purchasedList)
 			
 			Label("Locations", systemImage: "map")
