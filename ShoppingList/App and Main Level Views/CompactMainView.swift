@@ -62,7 +62,7 @@ struct CompactMainView: View {
                 .tabItem { Label("Shopping List", systemImage: "cart") }
                 .tag(NavigationItem.shoppingList)
             Rectangle()
-                .tabItem { Label("Purchased", systemImage: "purchased") }
+                .tabItem { Label("Selection", systemImage: "purchased") }
                 .tag(NavigationItem.purchasedList)
             Rectangle()
                 .tabItem { Label("Locations", systemImage: "map") }
